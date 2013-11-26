@@ -8,11 +8,7 @@ var timeleft = '0:00';
 var tasks = ["Do this.", "Then, do this."];
 
 function loadUI(){
-	Crafty.e("Color, TextArea")
-		.color("#FFFFFF")
-		.text(' ' + timeleft.toString())
-		.placed(540,25,50,30)
-		.styled('20px', '#000000');
+	Crafty.e("Timer");
 	
 	loadTaskList();
 }

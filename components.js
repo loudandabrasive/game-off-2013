@@ -40,3 +40,13 @@ Crafty.c('Button', {
 		return this;
 	}
 });
+
+Crafty.c('Timer', {
+	init: function() {
+		this.requires('Color, TextArea');
+		this.color("#FFFFFF")
+		this.text("0:00")
+		this.placed(540,25,50,30)
+		this.styled('20px', '#000000');
+	},
+});

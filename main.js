@@ -18,4 +18,13 @@ Crafty.scene("title", function() {
 		.text("Stay employed as you deal with your feral curse of the night!")
 		.placed(90,170,400,50)
 		.styled("15px","#FFFB00");
+	Crafty.e("Button")
+		.text("Begin!")
+		.placed(250,280,100,20)
+		.styled("15px", "#FFFFFF")
+		.mouse("Click", function(){ Crafty.scene("newGame");});
 });
+
+Crafty.scene("newGame", function(){
+	Crafty.scene("office");
+})

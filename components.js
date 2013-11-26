@@ -51,12 +51,24 @@ Crafty.c('Timer', {
 		this.text("0:00")
 		this.placed(540,25,50,30)
 		this.styled('20px', '#000000');
+	},
+	timer: function(maxTime, onTimeUp){
+		this.maxTime = maxTime,
+		this.bind('TimeUp', onTimeUp)
+		return this;
+	},
+	
+	start: function(){
+		this.runningTime = 0;
 		this.bind('MessureFPS', this.tick);
 	},
-
 	tick: function(){
 		if(!Crafty.isPaused()){
 			this.runningTime++;
+			if(this.runningTime >= this.maxTime){
+				Crafty.trigger('TimeUp');
+				this.unbind('MessureFPS', this.tick)
+			}
 			this.updateText(this.runningTime);
 		}
 	},

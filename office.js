@@ -8,7 +8,9 @@ var timeleft = '0:00';
 var tasks = ["Do this.", "Then, do this."];
 
 function loadUI(){
-	Crafty.e("Timer");
+	Crafty.e("Timer")
+		.timer(10, function(){console.log("Time's up!");})
+		.start();
 	
 	loadTaskList();
 }

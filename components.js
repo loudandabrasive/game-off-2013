@@ -1,6 +1,7 @@
 Crafty.c('TextArea', {
 	init: function() {
-		this.requires('2D, Canvas, Text');
+		this.requires('2D, DOM, Text');
+		this.unselectable();
 	},
 	placed: function(x,y,w,h){
 		this.attr({x: x, y: y, w: w, h: h})
@@ -20,6 +21,7 @@ Crafty.c('TextArea', {
 Crafty.c('Button', {
 	init: function() {
 		this.requires('TextArea, Mouse');
+		this.css({ "text-align": "center", "border": "2px solid black"});
 	},
 	placed: function(x,y,w,h){
 		this.attr({x: x, y: y, w: w, h: h})

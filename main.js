@@ -12,16 +12,19 @@ Crafty.scene("title", function() {
 	Crafty.background('#608C56');
 	Crafty.e("TextArea")
 		.text("Office Werewolf")
-		.placed(110,80,400,100)
+		.css({ "text-align": "center"})
+		.placed(0,80,600,100)
 		.styled("50px", "FFFB00");
 	Crafty.e("TextArea")
 		.text("Stay employed as you deal with your feral curse of the night!")
-		.placed(90,170,400,50)
+		.css({ "text-align": "center"})
+		.placed(0,170,600,50)
 		.styled("15px","#FFFB00");
-	Crafty.e("Button")
+	Crafty.e("Color, Button")
+		.color("#844")
 		.text("Begin!")
 		.placed(250,280,100,20)
-		.styled("15px", "#FFFFFF")
+		.styled("15px", "#FFF", "#884444")
 		.mouse("Click", function(){ Crafty.scene("newGame");});
 });
 

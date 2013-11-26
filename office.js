@@ -4,24 +4,26 @@ Crafty.scene("office", function() {
 	loadEntities();
 });
 
-var timeleft = 0;
+var timeleft = '0:00';
 var tasks = ["Do this.", "Then, do this."];
 
 function loadUI(){
-	Crafty.e("TextArea")
-		.text(timeleft.toString())
-		.placed(550,25,50,30)
-		.styled('20px', '#000');
+	Crafty.e("Color, TextArea")
+		.color("#FFFFFF")
+		.text(' ' + timeleft.toString())
+		.placed(540,25,50,30)
+		.styled('20px', '#000000');
 	
 	loadTaskList();
 }
 
 function loadTaskList(){
 	for(var i=0; i < tasks.length; i++){
-		Crafty.e("TextArea")
+		Crafty.e("Color, TextArea")
+			.color("#FFFFFF")
 			.text(tasks[i])
-			.placed(15,30+(i*25),200,15)
-			.styled('12px', '#000');
+			.placed(15,30+(i*25),100,15)
+			.styled('12px', '#000000');
 	}
 }
 

@@ -55,6 +55,7 @@ Crafty.c('Timer', {
 	timer: function(maxTime, onTimeUp){
 		this.maxTime = maxTime,
 		this.bind('TimeUp', onTimeUp)
+		this.updateText(maxTime)
 		return this;
 	},
 	
@@ -69,7 +70,7 @@ Crafty.c('Timer', {
 				Crafty.trigger('TimeUp');
 				this.unbind('MessureFPS', this.tick)
 			}
-			this.updateText(this.runningTime);
+			this.updateText(this.maxTime - this.runningTime);
 		}
 	},
 

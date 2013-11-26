@@ -9,10 +9,11 @@ var tasks = ["Do this.", "Then, do this."];
 
 function loadUI(){
 	Crafty.e("Timer")
-		.timer(10, function(){console.log("Time's up!");})
-		.start();
+		.timer(10, function(){console.log("Time's up!");});
 	
 	loadTaskList();
+
+	Crafty.trigger("StartTimer");
 }
 
 function loadTaskList(){

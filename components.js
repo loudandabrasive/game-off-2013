@@ -54,11 +54,18 @@ Crafty.c('Timer', {
 		this.bind('MessureFPS', this.tick);
 	},
 
-tick: function(){
+	tick: function(){
 		if(!Crafty.isPaused()){
 			this.runningTime++;
-			console.log(this.runningTime.toString())
+			this.updateText(this.runningTime);
 		}
 	},
 
+	updateText: function(time){
+		var minutes = Math.floor(time / 60);
+		var seconds = time % 60;
+		if(seconds < 10)
+			seconds = '0' + seconds.toString()
+		this.text(minutes + ':' + seconds.toString());
+	}
 });

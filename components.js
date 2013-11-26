@@ -49,7 +49,8 @@ Crafty.c('Timer', {
 		this.requires('Color, TextArea');
 		this.color("#FFFFFF")
 		this.text("0:00")
-		this.placed(540,25,50,30)
+		this.css({ "text-align": "center", "border": "2px solid black"})
+		this.placed(520,25,70,22)
 		this.styled('20px', '#000000');
 	},
 	timer: function(maxTime, onTimeUp){
@@ -82,5 +83,7 @@ Crafty.c('Timer', {
 		if(seconds < 10)
 			seconds = '0' + seconds.toString()
 		this.text(minutes + ':' + seconds.toString());
+		var color = time >= 10 ? "#000000" : "#FF0000";
+		this.textColor(color);
 	}
 });

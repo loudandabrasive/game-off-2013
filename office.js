@@ -8,22 +8,20 @@ var timeleft = 0;
 var tasks = ["Do this.", "Then, do this."];
 
 function loadUI(){
-	Crafty.e("2D, Canvas, Text")
-		.attr({ x:550, y:25, w:50, h:30})
+	Crafty.e("TextArea")
 		.text(timeleft.toString())
-		.textFont({ size: '20px', weight: 'bold' })
-		.textColor("#000");
-
+		.placed(550,25,50,30)
+		.styled('20px', '#000');
+	
 	loadTaskList();
 }
 
 function loadTaskList(){
 	for(var i=0; i < tasks.length; i++){
-		Crafty.e("2D, Canvas, Text")
-			.attr({x: 15, y:30+(i*25), w:200, h:15})
+		Crafty.e("TextArea")
 			.text(tasks[i])
-			.textFont({ size: '10x' })
-			.textColor("#000");
+			.placed(15,30+(i*25),200,15)
+			.styled('12px', '#000');
 	}
 }
 

@@ -10,16 +10,12 @@ Game = {
 
 Crafty.scene("title", function() {
 	Crafty.background('#608C56');
-	Crafty.e("2D, DOM, Text")
-		.attr({ x:100, y:100, w:400, h:100})
+	Crafty.e("TextArea")
 		.text("Office Werewolf")
-		.css({ "text-align": "center"})
-		.textFont({ size: '50px', weight: 'bold' })
-		.textColor("#FFFB00");
-	Crafty.e("2D, DOM, Text")
-		.attr({ x:100, y:200, w:400, h:50})
+		.placed(110,80,400,100)
+		.styled("50px", "FFFB00");
+	Crafty.e("TextArea")
 		.text("Stay employed as you deal with your feral curse of the night!")
-		.css({ "text-align": "center"})
-		.textFont({ size: '15px'})
-		.textColor("#FFFB00");
+		.placed(90,170,400,50)
+		.styled("15px","#FFFB00");
 });

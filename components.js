@@ -42,11 +42,23 @@ Crafty.c('Button', {
 });
 
 Crafty.c('Timer', {
+	maxTime: 0,
+	runningTime: 0,
+
 	init: function() {
 		this.requires('Color, TextArea');
 		this.color("#FFFFFF")
 		this.text("0:00")
 		this.placed(540,25,50,30)
 		this.styled('20px', '#000000');
+		this.bind('MessureFPS', this.tick);
 	},
+
+tick: function(){
+		if(!Crafty.isPaused()){
+			this.runningTime++;
+			console.log(this.runningTime.toString())
+		}
+	},
+
 });

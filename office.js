@@ -6,6 +6,7 @@ Crafty.scene("office", function() {
 
 var timeleft = '0:00';
 var tasks = ["Do this.", "Then, do this."];
+var completedTaskCount = 0;
 
 function loadUI(){
 	Crafty.e("Timer")
@@ -18,12 +19,12 @@ function loadUI(){
 
 function loadTaskList(){
 	for(var i=0; i < tasks.length; i++){
-		Crafty.e("Color, TextArea")
-			.color("#FFFFFF")
-			.text(tasks[i])
-			.placed(15,30+(i*25),100,15)
-			.styled('12px', '#000000');
+		Crafty.e("Task")
+			.task(i, tasks[i])
+			.withCondition("Task" + i + "Done");
 	}
+
+	Crafty.bind("TaskCompleted", onTaskHasBeenCompleted)
 }
 
 function loadEntities(){
@@ -31,4 +32,12 @@ function loadEntities(){
 		.attr({x:10, y:10, w:20, h:20})
 		.color("red")
 		.fourway(5);
+}
+
+function onTaskHasBeenCompleted(){
+	completedTaskCount++;
+	if(completedTaskCount == Crafty("Task").length){
+		Crafty.trigger("AllTasksCompleted");
+		console.log("All tasks completed.");
+	}
 }

@@ -87,3 +87,31 @@ Crafty.c('Timer', {
 		this.textColor(color);
 	}
 });
+
+Crafty.c('Task', {
+	conditionEvent: "",
+
+	init: function() {
+		this.requires('Color, TextArea');
+	},
+	task: function(rank, name){
+		this.color("#FFFFFF")
+		this.text(name)
+		this.css({ "border": "2px solid black", "padding": "0 0 0 5px"})
+		this.placed(15,30+(rank*25),100,15)
+		this.styled('12px', '#000000');
+		return this;
+	},
+	withCondition: function(evtName){
+		this.conditionEvent = evtName;
+		this.bind(this.conditionEvent, this.onComplete);
+		return this;
+	},
+
+	onComplete: function(){
+		this.color("#99FFAA")
+		this.css({"text-decoration": "line-through"})
+		this.unbind(this.conditionEvent, this.onComplete);
+		Crafty.trigger("TaskCompleted");
+	},
+});

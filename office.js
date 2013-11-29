@@ -28,10 +28,7 @@ function loadTaskList(){
 }
 
 function loadEntities(){
-	Crafty.e("2D, Canvas, Color, Fourway")
-		.attr({x:10, y:10, w:20, h:20})
-		.color("red")
-		.fourway(5);
+	Crafty.e("Player");
 }
 
 function onTaskHasBeenCompleted(){

@@ -115,3 +115,22 @@ Crafty.c('Task', {
 		Crafty.trigger("TaskCompleted");
 	},
 });
+
+Crafty.c('GameObject', {
+	init: function() {
+		this.requires('2D, Canvas, Color');
+	},
+	placed: function(x,y,w,h){
+		this.attr({x: x, y: y, w: w, h: h})
+		return this;
+	}
+});
+
+Crafty.c('Player', {
+	init: function() {
+    	this.requires('GameObject, Fourway')
+    		.placed(10,10,20,20)
+    		.color('#FF0000')
+    		.fourway(3);
+  	}
+});

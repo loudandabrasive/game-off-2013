@@ -53,12 +53,11 @@ Crafty.c('Timer', {
 		this.placed(520,25,70,22)
 		this.styled('20px', '#000000');
 	},
-	timer: function(maxTime, onTimeUp){
+	timer: function(maxTime){
 		this.runningTime = 0;
 		this.maxTime = maxTime,
 		this.updateText(maxTime)
 		this.bind('StartTimer', this.start)
-		this.bind('TimeUp', onTimeUp)
 		return this;
 	},
 	

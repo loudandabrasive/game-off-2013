@@ -6,7 +6,18 @@ Crafty.scene("office", function() {
 
 	Crafty.bind("TaskCompleted", onTaskHasBeenCompleted);
 
+	this.levelComplete = Crafty.bind("AllTasksCompleted", function() {
+		Crafty.scene("woods");
+	});
+	this.levelFailed = Crafty.bind("TimeUp", function() {
+		Crafty.scene("title");
+	});
+
 	Crafty.trigger("StartTimer");
+}, 
+function() {
+	Crafty.unbind("AllTasksCompleted", this.levelComplete);
+	Crafty.unbind("TimeUp", this.levelFailed);
 });
 
 function loadOfficeEntities(){
@@ -30,7 +41,7 @@ var completedTaskCount = 0;
 
 function loadUI(){
 	Crafty.e("Timer")
-		.timer(10, function(){console.log("Time's up!");});
+		.timer(20);
 
 	Crafty("TaskObject").each(function(i) {
 		Crafty.e("Task")

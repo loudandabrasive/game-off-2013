@@ -1,31 +1,15 @@
 Crafty.scene("office", function() {
 	Crafty.background('#FD9');
+
+    loadOfficeEntities();
 	loadUI();
-	loadEntities();
-	loadTaskList();
-});
-
-var timeleft = '0:00';
-var completedTaskCount = 0;
-
-function loadUI(){
-	Crafty.e("Timer")
-		.timer(10, function(){console.log("Time's up!");});
-
-	Crafty.trigger("StartTimer");
-}
-
-function loadTaskList(){
-	Crafty("TaskObject").each(function(i) {
-		Crafty.e("Task")
-			.task(i, this.boundTask)
-			.withCondition(this.boundTask);
-    });
 
 	Crafty.bind("TaskCompleted", onTaskHasBeenCompleted);
-}
 
-function loadEntities(){
+	Crafty.trigger("StartTimer");
+});
+
+function loadOfficeEntities(){
 	Crafty.e("Player");
 
 	Crafty.e("Wall")
@@ -42,10 +26,22 @@ function loadEntities(){
 		.bindToTask("Spacebar at Blue");
 }
 
+var completedTaskCount = 0;
+
+function loadUI(){
+	Crafty.e("Timer")
+		.timer(10, function(){console.log("Time's up!");});
+
+	Crafty("TaskObject").each(function(i) {
+		Crafty.e("Task")
+			.task(i, this.boundTask)
+			.withCondition(this.boundTask);
+    });
+}
+
 function onTaskHasBeenCompleted(){
 	completedTaskCount++;
 	if(completedTaskCount == Crafty("Task").length){
 		Crafty.trigger("AllTasksCompleted");
-		console.log("All tasks completed.");
 	}
 }

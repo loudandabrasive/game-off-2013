@@ -18,29 +18,6 @@ Crafty.c('TextArea', {
 	}
 });
 
-Crafty.c('Button', {
-	init: function() {
-		this.requires('TextArea, Mouse');
-		this.css({ "text-align": "center", "border": "2px solid black"});
-	},
-	placed: function(x,y,w,h){
-		this.attr({x: x, y: y, w: w, h: h})
-		return this;
-	},
-	mouse: function(action, reaction){
-		this.bind(action, reaction);
-		return this;
-	},
-	styled: function(size, textcolor){
-		this.styled(size, textcolor);
-		return this;
-	},
-	text: function(text){
-		this.text(text);
-		return this;
-	}
-});
-
 Crafty.c('Timer', {
 	maxTime: 0,
 	runningTime: 0,

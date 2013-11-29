@@ -7,10 +7,10 @@ Crafty.scene("woods", function() {
 	loadUI();
 
 	this.levelComplete = Crafty.bind("AllTasksCompleted", function() {
-		Crafty.scene("office");
+		Crafty.scene("woodsComplete");
 	});
 	this.levelFailed = Crafty.bind("TimeUp", function() {
-		Crafty.scene("title");
+		Crafty.scene("woodsFailed");
 	});
 
 	Crafty.trigger("StartTimer");

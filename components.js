@@ -128,9 +128,24 @@ Crafty.c('GameObject', {
 
 Crafty.c('Player', {
 	init: function() {
-    	this.requires('GameObject, Fourway')
+    	this.requires('GameObject, Fourway, Collision')
     		.placed(10,10,20,20)
     		.color('#FF0000')
-    		.fourway(3);
-  	}
+    		.fourway(3)
+    		.onHit('Solid', this.halt);
+  	},
+  	halt: function() {
+	    this._speed = 0;
+	    if (this._movement) {
+	      this.x -= this._movement.x;
+	      this.y -= this._movement.y;
+	  	}
+    }
+});
+
+Crafty.c('Wall', {
+  init: function() {
+  	this.requires('GameObject, Solid')
+  		.color('#F7F7CC');
+  }
 });

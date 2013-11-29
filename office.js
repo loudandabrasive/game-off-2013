@@ -29,6 +29,9 @@ function loadTaskList(){
 
 function loadEntities(){
 	Crafty.e("Player");
+
+	Crafty.e("Wall")
+		.placed(100,100,20,300);
 }
 
 function onTaskHasBeenCompleted(){

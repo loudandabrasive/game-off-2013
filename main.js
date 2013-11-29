@@ -5,6 +5,8 @@ Game = {
     Crafty.init(600, 400, 'game');
     Crafty.background('#000');
     Crafty.scene('title');
+
+    Crafty.bind("TaskCompleted", onTaskHasBeenCompleted);
   }
 }
 
@@ -31,3 +33,23 @@ Crafty.scene("title", function() {
 Crafty.scene("newGame", function(){
 	Crafty.scene("office");
 })
+
+var completedTaskCount = 0;
+
+function loadUI(){
+	Crafty.e("Timer")
+		.timer(20);
+
+	Crafty("TaskObject").each(function(i) {
+		Crafty.e("Task")
+			.task(i, this.boundTask)
+			.withCondition(this.boundTask);
+    });
+}
+
+function onTaskHasBeenCompleted(){
+	completedTaskCount++;
+	if(completedTaskCount == Crafty("Task").length){
+		Crafty.trigger("AllTasksCompleted");
+	}
+}

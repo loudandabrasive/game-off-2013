@@ -98,7 +98,7 @@ Crafty.c('Task', {
 		this.color("#FFFFFF")
 		this.text(name)
 		this.css({ "border": "2px solid black", "padding": "0 0 0 5px"})
-		this.placed(15,30+(rank*25),100,15)
+		this.placed(15,30+(rank*25),150,15)
 		this.styled('12px', '#000000');
 		return this;
 	},
@@ -127,11 +127,15 @@ Crafty.c('GameObject', {
 });
 
 Crafty.c('Player', {
+	interactiveObject: null,
+
 	init: function() {
     	this.requires('GameObject, Fourway, Collision')
     		.placed(10,10,20,20)
     		.color('#FF0000')
     		.fourway(3)
+    		.bind('KeyDown', this.interactionCheck)
+    		.onHit('Interactive', this.hitInteractive, this.leaveInteractive )
     		.onHit('Solid', this.halt);
   	},
   	halt: function() {
@@ -140,7 +144,20 @@ Crafty.c('Player', {
 	      this.x -= this._movement.x;
 	      this.y -= this._movement.y;
 	  	}
-    }
+    },
+    interactionCheck: function(evt){
+    	if(evt.key == Crafty.keys['SPACE']) {
+			if(this.interactiveObject){
+				this.interactiveObject.onInteract();
+			}
+		}
+    },
+    hitInteractive: function(objects) {
+    	this.interactiveObject = objects[0].obj;
+  	},
+  	leaveInteractive: function(objects) {
+    	this.interactiveObject = null;
+  	},
 });
 
 Crafty.c('Wall', {
@@ -148,4 +165,21 @@ Crafty.c('Wall', {
   	this.requires('GameObject, Solid')
   		.color('#F7F7CC');
   }
+});
+
+Crafty.c('TaskObject', {
+	boundTask: "",
+	nextToPlayer: false,
+
+	init: function() {
+		this.requires('GameObject, Interactive, Solid');
+	},
+	bindToTask: function(task){
+		this.boundTask = task;
+		return this;
+	},
+
+	onInteract: function(){
+		Crafty.trigger(this.boundTask);
+	},
 });

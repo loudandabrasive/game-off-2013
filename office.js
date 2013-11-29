@@ -2,29 +2,27 @@ Crafty.scene("office", function() {
 	Crafty.background('#FD9');
 	loadUI();
 	loadEntities();
+	loadTaskList();
 });
 
 var timeleft = '0:00';
-var tasks = ["Do this.", "Then, do this."];
 var completedTaskCount = 0;
 
 function loadUI(){
 	Crafty.e("Timer")
 		.timer(10, function(){console.log("Time's up!");});
-	
-	loadTaskList();
 
 	Crafty.trigger("StartTimer");
 }
 
 function loadTaskList(){
-	for(var i=0; i < tasks.length; i++){
+	Crafty("TaskObject").each(function(i) {
 		Crafty.e("Task")
-			.task(i, tasks[i])
-			.withCondition("Task" + i + "Done");
-	}
+			.task(i, this.boundTask)
+			.withCondition(this.boundTask);
+    });
 
-	Crafty.bind("TaskCompleted", onTaskHasBeenCompleted)
+	Crafty.bind("TaskCompleted", onTaskHasBeenCompleted);
 }
 
 function loadEntities(){
@@ -32,6 +30,16 @@ function loadEntities(){
 
 	Crafty.e("Wall")
 		.placed(100,100,20,300);
+
+	Crafty.e("TaskObject")
+		.placed(300,200,10,10)
+		.color("#FFFFFF")
+		.bindToTask("Spacebar at White");
+
+	Crafty.e("TaskObject")
+		.placed(500,300,50,50)
+		.color("#00FFFF")
+		.bindToTask("Spacebar at Blue");
 }
 
 function onTaskHasBeenCompleted(){
